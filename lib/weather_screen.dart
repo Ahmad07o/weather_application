@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weather_application/additional_info_item.dart';
 import 'package:weather_application/hourly_forcast_item.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -67,13 +68,60 @@ class WeatherScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  HourlyForcastItem(),
-                  HourlyForcastItem(),
-                  HourlyForcastItem(),
-                  HourlyForcastItem(),
-                  HourlyForcastItem(),
+                  HourlyForcastItem(
+                    time: "9:30",
+                    icon: Icons.cloud,
+                    temprature: "301.7",
+                  ),
+                  HourlyForcastItem(
+                    time: "10:30",
+                    icon: Icons.cloud,
+                    temprature: "310.10",
+                  ),
+                  HourlyForcastItem(
+                    time: "11:30",
+                    icon: Icons.cloud,
+                    temprature: "334.4",
+                  ),
+                  HourlyForcastItem(
+                    time: "12:30",
+                    icon: Icons.cloud,
+                    temprature: "400.0",
+                  ),
+                  HourlyForcastItem(
+                    time: "1:30",
+                    icon: Icons.cloud,
+                    temprature: "410.0",
+                  ),
                 ],
               ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Additional Information',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+
+            SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                additional_Info_item(
+                  icon: Icons.water_drop,
+                  label: "Humidity",
+                  value: "92",
+                ),
+                additional_Info_item(
+                  icon: Icons.air,
+                  label: "Wind speed",
+                  value: "7.67",
+                ),
+                additional_Info_item(
+                  icon: Icons.beach_access,
+                  label: "preassure",
+                  value: "1006",
+                ),
+              ],
             ),
           ],
         ),
