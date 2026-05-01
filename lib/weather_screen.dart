@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:weather_application/additional_info_item.dart';
 import 'package:weather_application/hourly_forcast_item.dart';
 import 'package:weather_application/secrets.dart';
@@ -141,18 +142,24 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   height: 120,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 4,
+                    itemCount: 15,
                     itemBuilder: (BuildContext, index) {
+                      final hourlyForecast = data['list'][index + 1]['dt_txt']
+                          .toString();
+                      final hourlySky =
+                          data['list'][index + 1]['main']['temp'] == 'Rain' ||
+                              data['list'][index + 1]['main']['temp'] ==
+                                  'Clouds'
+                          ? Icons.cloud
+                          : Icons.sunny;
+                      final hourlyTemp = data['list'][index + 1]['main']['temp']
+                          .toString();
+                      final time = DateTime.parse(hourlyForecast);
+
                       return HourlyForcastItem(
-                        time: data['list'][index + 1]['dt'].toString(),
-                        icon:
-                            data['list'][index + 1]['main']['temp'] == 'Rain' ||
-                                data['list'][index + 1]['main']['temp'] ==
-                                    'Clouds'
-                            ? Icons.cloud
-                            : Icons.sunny,
-                        temprature: data['list'][index + 1]['main']['temp']
-                            .toString(),
+                        time: DateFormat.Hm().format(time),
+                        icon: hourlySky,
+                        temprature: hourlyTemp,
                       );
                     },
                   ),
